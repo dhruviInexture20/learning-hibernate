@@ -23,20 +23,22 @@ public class StudentDao implements ApplicationContextAware {
 		em.getTransaction().begin();
 		
 		logger.info("in add");
-		em.persist(s1);
+		em.persist(em.contains(s1) ? s1 : em.merge(s1));
+		
 		em.getTransaction().commit();
 		
 	}
 	
-	
-	void deleteStudent(StudentEntity s1) {
+	void deleteStudent(StudentEntity s) {
 		emf = (EntityManagerFactory) context.getBean("entityManagerFactory");
 		em = emf.createEntityManager();
 		
 		em.getTransaction().begin();
 		
+//		em.remove(s);
+		em.remove(em.contains(s) ? s : em.merge(s));
 		logger.info("in delete");
-		em.remove(s1);
+		
 		
 		em.getTransaction().commit();
 	}
@@ -49,6 +51,9 @@ public class StudentDao implements ApplicationContextAware {
 		
 		logger.info("in find");
 		StudentEntity student = em.find(StudentEntity.class ,id);
+		if(student.getS_id() == 0) {
+			logger.info("Student data not available");
+		}
 		em.getTransaction().commit();
 		
 		return student;

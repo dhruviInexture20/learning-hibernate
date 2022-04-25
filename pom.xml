@@ -91,9 +91,6 @@
 		</dependency>
 
 
-
-
-
 	</dependencies>
 
 	<build>
@@ -103,8 +100,8 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
-					<executable>java</executable>
-					<mainClass>dhruvi.hibernate.mappings.App</mainClass>
+
+					<cleanupDaemonThreads>false</cleanupDaemonThreads>
 				</configuration>
 			</plugin>
 		</plugins>

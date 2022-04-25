@@ -32,29 +32,29 @@ public class Main {
 		// get student details by id
 		StudentEntity s3 = context.getBean("student", StudentEntity.class);
 		
-		s3 = dao.getStudent(1);
+		s3 = dao.getStudent(2);
+		if(s3.getS_id() == 0) {
+			logger.info("Student data unavailable");
+		}
+		else {
+			logger.info(s3.getS_id());
+			logger.info(s3.getS_name());
+			logger.info(s3.getS_age());
+		}
 		
-		logger.info(s3.getS_id());
-		logger.info(s3.getS_name());
-		logger.info(s3.getS_age());
+		
 		
 		
 		// delete s1
 		
+		dao.deleteStudent(s3);
+		logger.info(s3.getS_name() + " is deleted");
 		
-		
-//		
-//		
-//		
-//		StudentEntity s1 = context.getBean("student", StudentEntity.class);
-//		
-//		
-//		
-//		StudentEntity s2 = context.getBean("student", StudentEntity.class);
-//		s2.setS_name("Brijesh");
-//		s2.setS_age(23);
-//		
-
 	}
 
 }
+
+
+
+
+//mvn exec:java -Dexec.mainClass="dhruvi.hibernate.jpa.Main" -Dexec.cleanupDaemonThreads=false

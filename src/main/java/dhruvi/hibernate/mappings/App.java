@@ -91,24 +91,24 @@ public class App
         dao.addObject(user1);
         
         
+       
+        // fetching data
         
         UserProfile user =dao.getUserById(6);
         logger.info(user);
         
         
         logger.info(user.getUsername());
-        logger.info(user.getRoles());
+        List<Role> userRoles = user.getRoles();
+        
+        logger.info(userRoles.stream().map(myRole -> myRole.getRoleName()).collect(Collectors.toList()));
         
         
         Role role = dao.getRoleById(10);
         logger.info(" ----- role ----");
         logger.info(role.getRoleName());
-        logger.info(role.getUsers());
-        
-        
-        
-        // fetching data
-        
+        List<UserProfile> userList = role.getUsers();
+        logger.info(userList.stream().map(myUser -> myUser.getUsername()).collect(Collectors.toList()) );
         
         // fetching employee 
         Employee emp = dao.getEmployee(1);
@@ -117,7 +117,6 @@ public class App
         logger.info(emp.getName());
         logger.info(emp.getContact().getEmail());
         logger.info(emp.getContact().getSkype());
-        
         
         
         // fetching question and its all answers
@@ -129,14 +128,10 @@ public class App
         List<Answer> ansList = que.getAnswers();
         logger.info(ansList.stream().map(ans -> ans.getAnswer()).collect(Collectors.toList()));
         
-        
-        
         context.close();
-        
-        
-        
-        
-        
         
     }
 }
+
+
+//mvn exec:java -Dexec.mainClass="dhruvi.hibernate.mappings.App"
